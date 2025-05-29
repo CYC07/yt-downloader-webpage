@@ -1,0 +1,349 @@
+/* --- Global Resets & Body --- */
+html, body {
+  height: 100%; /* Ensure full viewport height for flex centering */
+  margin: 0;
+  padding: 0;
+  background-color: #222; /* Dark background for the entire page */
+  color: #eee;      /* Default light text color */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif */
+  overflow-x: hidden; /* Prevent horizontal scrollbars */
+}
+
+/* Main React root div */
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* Stack navbar and content vertically */
+}
+
+/* --- Navbar Styling --- */
+.app-navbar {
+  position: fixed; /* Fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4a0072; /* Darker, richer purple */
+  color: white;
+  padding: 0 25px; /* Adjusted padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4); /* Softer shadow */
+  height: 60px; /* Fixed height for navbar */
+  box-sizing: border-box;
+}
+
+.app-navbar .nav-section {
+  display: flex;
+  align-items: center;
+}
+
+.app-navbar a, .app-navbar .nav-text {
+  color: #f0f0f0; /* Slightly off-white for better contrast */
+  text-decoration: none;
+  margin: 0 18px; /* Increased margin */
+  font-weight: 500; /* Medium weight */
+  font-size: 1.05rem;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.app-navbar .nav-text {
+    cursor: default; /* If it's just text */
+}
+
+.app-navbar a:hover {
+  color: #c792ff; /* Lighter, vibrant purple for hover */
+  transform: translateY(-1px); /* Slight lift effect */
+}
+
+.app-navbar .logout-button {
+  background-color: #8a2be2; /* Brighter purple */
+  color: white;
+  border: none;
+  padding: 9px 18px; /* Adjusted padding */
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.app-navbar .logout-button:hover {
+  background-color: #9932cc; /* Slightly darker on hover */
+  transform: translateY(-1px);
+}
+
+/* --- Main Content Area Container (Below Navbar) --- */
+.app-content-container {
+  padding-top: 60px; /* Match navbar height to prevent overlap */
+  flex-grow: 1;      /* Allow this container to fill remaining vertical space */
+  display: flex;       /* Use flex to help center child content if needed */
+  flex-direction: column; /* Stack children (like auth pages) vertically */
+  width: 100%;         /* Ensure it takes full width */
+  box-sizing: border-box;
+}
+
+/* --- Specific Styling for HomePage's direct content (if any outside of forms/queue) --- */
+.main-content-wrapper { /* This was for HomePage's specific layout */
+  text-align: center;
+  flex-grow: 1; /* If HomePage should fill space */
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-section {
+  min-height: calc(80vh - 60px); /* Adjust if needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  color: #e0c6ff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 18px #8a2be2; /* Slightly increased glow */
+}
+
+.form-section { /* For HomePage download form */
+  padding: 40px 20px;
+  min-height: 50vh;
+}
+
+.form-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #f0f0f0;
+}
+
+/* --- Authentication Page Styling (Login & Register) --- */
+.auth-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers .auth-form-wrapper */
+  align-items: center;     /* Horizontally centers .auth-form-wrapper */
+  flex-grow: 1;            /* Takes up remaining vertical space in .app-content-container */
+  width: 100%;
+  padding: 20px;           /* Padding around the form box from viewport edges */
+  box-sizing: border-box;
+}
+
+.auth-form-wrapper {
+  background-color: #2c2c2c; /* Dark grey for the form box */
+  padding: 35px 45px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 420px; /* Max width of the form box */
+}
+
+.auth-form-wrapper h2 {
+  font-size: 2.4rem;
+  color: #e0c6ff;   /* Light purple */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-form-wrapper label {
+  display: block;
+  margin-bottom: 10px; /* Increased space */
+  font-weight: 500; /* Medium weight */
+  font-size: 1.1rem;
+  color: #ddd; /* Lighter label color */
+  text-align: left;
+}
+
+.auth-form-wrapper input[type="text"],
+.auth-form-wrapper input[type="email"],
+.auth-form-wrapper input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 12px; /* Increased padding */
+  margin-bottom: 25px; /* Increased space */
+  border: 1px solid #4a4a4a; /* Slightly lighter border */
+  border-radius: 6px;
+  background-color: #383838;
+  color: #f0f0f0;
+  font-size: 1rem;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.auth-form-wrapper input[type="text"]:focus,
+.auth-form-wrapper input[type="email"]:focus,
+.auth-form-wrapper input[type="password"]:focus {
+  outline: none;
+  border-color: #9370DB; /* Medium purple border on focus */
+  box-shadow: 0 0 11px 2.2px #6a0dad; /* Purple glow, slightly smaller radius, more intense */
+}
+
+.auth-form-wrapper button[type="submit"] {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.15rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 10px; /* Add some space above button */
+}
+
+.auth-form-wrapper button[type="submit"]:hover {
+  background-color: #800080; /* Darker purple */
+  box-shadow: 0 0 16.5px 3.3px #6a0dad; /* More defined glow */
+}
+
+.auth-form-wrapper button[type="submit"]:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.auth-form-wrapper .form-error {
+  color: #ff7f7f; /* Lighter red for error */
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.auth-form-wrapper .form-success {
+  color: #90ee90; /* Light green for success */
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.auth-form-wrapper .switch-auth-link {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 1rem;
+  color: #bbb; /* Lighter grey for this text */
+}
+
+.auth-form-wrapper .switch-auth-link a {
+  color: #a0cfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-form-wrapper .switch-auth-link a:hover {
+  text-decoration: underline;
+}
+/* --- Download Queue / History --- */
+.download-queue-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #4a0072; /* Darker purple for the main queue box */
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(106, 13, 173, 0.5);
+  color: #f0f0f0; /* Default text color for this section */
+}
+
+.download-queue-section h3 {
+  color: white; /* Or #f0f0f0 */
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.download-queue-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.download-queue-section li {
+  /* --- MODIFIED BACKGROUND AND TEXT COLOR FOR LIST ITEMS --- */
+  background-color: #3a0052; /* A darker shade of purple, or a contrasting dark grey */
+  /* Or try a dark grey: background-color: #2c2c2c; */
+  color: #e0e0e0;             /* Light text color for item content */
+  /* ------------------------------------------------------- */
+  border: 1px solid #5a0082; /* Slightly lighter purple border */
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.download-queue-section li small {
+  display: block;
+  color: #b0b0b0; /* Slightly darker grey for less important text */
+  margin-bottom: 3px;
+  word-break: break-all;
+}
+
+.download-queue-section li strong { /* For "Status:", "Failed!", "Complete!" */
+    font-weight: bold;
+}
+/* Ensure specific status colors override the item's base text color if needed */
+.download-queue-section li .status-complete strong {
+    color: lightgreen;
+}
+.download-queue-section li .status-failed strong {
+    color: salmon;
+}
+
+
+.download-queue-section progress {
+  width: 100%;
+  height: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+/* ... (progress bar styles remain the same) ... */
+
+.download-queue-section .action-button { /* Class for download/clear buttons */
+    padding: 8px 12px;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 5px;
+    margin-top: 5px;
+    transition: background-color 0.2s ease;
+}
+.download-queue-section .action-button:hover {
+    background-color: #8a2be2;
+}
+
+.download-queue-section .clear-button {
+    background-color: #555; /* Darker grey for clear button */
+    margin-left: 10px;
+    font-size: 0.8em;
+}
+.download-queue-section .clear-button:hover {
+    background-color: #777;
+}
+
+/* --- Download Form (HomePage) & Queue Specifics --- */
+/* (Keep your specific .download-form, .playlist-checkbox-label, .download-queue-section styles as before) */
+/* Ensure they don't conflict with .auth-form-wrapper if reused */
+
+.download-form label { margin-right: 10px; font-weight: bold; color: #ccc; text-align: left; }
+.download-form input[type="url"], .download-form input[type="text"], .download-form select { padding: 10px; margin-bottom: 15px; border: 1px solid #555; border-radius: 5px; background-color: #333; color: #eee; min-width: 300px; transition: box-shadow 0.3s ease, border-color 0.3s ease; }
+.download-form input[type="url"]:focus, .download-form input[type="text"]:focus, .download-form select:focus { outline: none; border-color: #8a2be2; box-shadow: 0 0 16.5px 5.5px #6a0dad; }
+.download-form button, .download-form .action-button { padding: 10px 20px; background-color: #6a0dad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; transition: background-color 0.3s ease, box-shadow 0.3s ease; }
+.download-form button:hover, .download-form .action-button:hover { background-color: #8a2be2; box-shadow: 0 0 16.5px 5.5px #6a0dad; }
+.download-form button:disabled, .download-form .action-button:disabled { background-color: #555; cursor: not-allowed; box-shadow: none; }
+.download-form select option { background-color: #333; color: #eee; padding: 5px; }
+.download-form select option:hover { background-color: #8a2be2 !important; color: white !important; }
+.playlist-checkbox-label { display: flex; align-items: center; cursor: pointer; color: #ccc; margin-bottom: 15px; }
+.playlist-checkbox-label input[type="checkbox"] { margin-right: 8px; appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 16px; height: 16px; border: 2px solid #8a2be2; border-radius: 3px; position: relative; cursor: pointer; outline: none; }
+.playlist-checkbox-label input[type="checkbox"]:checked { background-color: #6a0dad; }
+.playlist-checkbox-label input[type="checkbox"]:checked::after { content: '\u2713'; font-size: 12px; color: white; position: absolute; top: 0px; left: 2px; }
+.download-queue-section { margin-top: 40px; padding: 20px; background-color: #4a0072; border-radius: 8px; box-shadow: 0 0 15px rgba(106, 13, 173, 0.5); }
+.download-queue-section h3 { color: white; margin-bottom: 15px; text-align: center; font-size: 1.8rem; }
+.download-queue-section ul { list-style: none; padding: 0; }
+.download-queue-section li { background-color: #3c005a; color: #f0f0f0; border: 1px solid #6a0dad; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.download-queue-section li small { display: block; color: #c0c0c0; margin-bottom: 3px; word-break: break-all; }
+.download-queue-section progress { width: 100%; height: 10px; margin-top: 5px; border-radius: 5px; }
+.download-queue-section progress::-webkit-progress-bar { background-color: #555; border-radius: 5px; }
+.download-queue-section progress::-webkit-progress-value { background-color: #9932cc; border-radius: 5px; }
+.download-queue-section progress::-moz-progress-bar { background-color: #9932cc; border-radius: 5px; }
+.download-queue-section .clear-button { background-color: #777; margin-left: 10px; font-size: 0.8em; }
+.download-queue-section .clear-button:hover { background-color: #999; box-shadow: 0 0 10px 2px #777; }
